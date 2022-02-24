@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router';
-import login from './components/Login';
+import principal from './components/Principal';
 
 Vue.use(Router);
 
 const routes = [
     {
-        name: 'login',
-        path: '/login',
-        component: login
+        name: 'principal',
+        path: '/principal',
+        component: principal
     }
 ]
 

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +12,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Route::get('{slug}', function () {
-    return view('welcome');
-}); */
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
 
 Route::get('{any}', function () {
