@@ -13,7 +13,7 @@ const routes = [
 ]
 
 export default new Router({
-    mode: 'history',
+    mode: 'abstract',
     base: 'auth/public',
     routes
 });

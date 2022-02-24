@@ -1,18 +1,20 @@
 <template>
-  <v-card class="mx-auto my-auto" max-width="700">
-    <v-form ref="form" v-model="valido">
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="6">
+  <v-container class="fill-height" fluid>
+    <v-row align="center" justify="center">
+      <v-card class="elevation-12" v-if="!$store.state.auth">
+        <v-toolbar color="primary" dark flat>
+          <v-toolbar-title>Iniciar Sesión</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-card-text>
+          <v-form ref="form" v-model="valido">
             <v-text-field
               v-model="usuario"
               :rules="usuarioRules"
               label="Usuario"
               required
             ></v-text-field>
-          </v-col>
 
-          <v-col cols="12" md="6">
             <v-text-field
               v-model="clave"
               :rules="claveRules"
@@ -22,22 +24,25 @@
               required
               @click:append="mostrarPass = !mostrarPass"
             ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-btn
-          v-if="!user.name"
-          :disabled="!valido"
-          color="primary"
-          class="mr-4"
-          @click="validar"
-        >
-          Inicar
-        </v-btn>
-        <v-btn v-if="user.name" color="primary" @click="me">logout</v-btn>
-        <br />
-        <router-link to="/registrar">Crear Cuenta</router-link>
-      </v-container>
-    </v-form>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            v-if="!$store.state.auth"
+            :disabled="!valido"
+            color="primary"
+            class="mr-4"
+            @click="validar"
+          >
+            Inicar
+          </v-btn>
+        </v-card-actions>
+        <div align="center">
+          <router-link to="/registrar">Crear Cuenta</router-link>
+        </div>
+      </v-card>
+    </v-row>
     <v-snackbar
       :timeout="2500"
       v-model="snackbar"
@@ -48,11 +53,9 @@
     >
       {{ this.mensaje }}
     </v-snackbar>
-  </v-card>
+  </v-container>
 </template>
 <script>
-import axios from "axios";
-axios.defaults.withCredentials = true;
 export default {
   data() {
     return {
@@ -62,7 +65,7 @@ export default {
       user: {},
       usuario: "kenny@gmail.com",
       mostrarPass: false,
-      clave: "12345678",
+      clave: "password",
       usuarioRules: [
         (v) => !!v || "Usuario es requerido",
         (v) => v.length >= 5 || "El usuario es minimo 5 caracteres",
@@ -74,20 +77,19 @@ export default {
     };
   },
   methods: {
-    me() {
-      /* axios.post("api/user").then((res) => {
-        this.user = res.data;
-      }); */
-      axios.post("logout").then((res) => {
-        this.user = {};
-      });
+    logout() {
+      this.$store.dispatch("logout");
     },
     validar() {
       var datos = {
         email: this.usuario,
         password: this.clave,
       };
-      axios.get("./sanctum/csrf-cookie").then(() => {
+      this.$store.dispatch("login", datos).catch((er) => {
+        this.mensaje = "Usuario o contraseña incorrecta";
+        this.snackbar = true;
+      });
+      /*       axios.get("./sanctum/csrf-cookie").then(() => {
         axios
           .post("./login", datos)
           .then((res) => {
@@ -97,9 +99,9 @@ export default {
             this.mensaje = "Usuario o contraseña incorrecta";
             this.snackbar = true;
           });
-      });
+      }); */
 
-      //this.$refs.form.validate();
+      this.$refs.form.validate();
     },
   },
 };
