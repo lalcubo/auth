@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/registrar', 'App\Http\Controllers\Auth\RegisterController@register');
 
 
 Route::get('{any}', function () {

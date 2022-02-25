@@ -1,13 +1,20 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-card class="elevation-12" v-if="!$store.state.auth">
+      <v-card class="elevation-12">
         <v-toolbar color="primary" dark flat>
-          <v-toolbar-title>Iniciar Sesión</v-toolbar-title>
+          <v-toolbar-title>Registrar Usuario</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
           <v-form ref="form" v-model="valido">
+            <v-text-field
+              v-model="nombre"
+              :rules="nombreRules"
+              label="Nombre"
+              required
+            ></v-text-field>
+
             <v-text-field
               v-model="correo"
               :rules="correoRules"
@@ -24,6 +31,18 @@
               required
               @click:append="mostrarPass = !mostrarPass"
             ></v-text-field>
+
+            <v-text-field
+              v-model="clave2"
+              :rules="claveRules"
+              :append-icon="mostrarPass ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="mostrarPass ? 'text' : 'password'"
+              label="repita la clave"
+              required
+              @click:append="mostrarPass = !mostrarPass"
+            ></v-text-field>
+
+            <v-select :items="tipo" label="Standard" dense> </v-select>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -35,19 +54,16 @@
             class="mr-4"
             @click="validar"
           >
-            Inicar
+            Registrar
           </v-btn>
         </v-card-actions>
-        <div align="center">
-          <router-link to="/registrar">Crear Cuenta</router-link>
-        </div>
       </v-card>
     </v-row>
     <v-snackbar
       :timeout="2500"
       v-model="snackbar"
       absolute
-      color="red accent-2"
+      :color="color"
       rounded="pill"
       right
     >
@@ -61,13 +77,16 @@ export default {
     return {
       valido: false,
       snackbar: false,
+      tipo: ["Admin", "Usuario"],
       mensaje: "",
       user: {},
-      correo: "kenny@gmail.com",
+      nombre: "Pedro",
+      correo: "algo@algo.com",
       mostrarPass: false,
-      clave: "password",
+      clave: "12345678",
+      clave2: "12345678",
       correoRules: [
-        (v) => !!v || "Correo es requerido",
+        (v) => !!v || "Usuario es requerido",
         (v) => v.length >= 5 || "El usuario es minimo 5 caracteres",
         (v) => {
           const pattern =
@@ -75,25 +94,44 @@ export default {
           return pattern.test(v) || "correo no valido";
         },
       ],
+      nombreRules: [
+        (v) => !!v || "Usuario es requerido",
+        (v) => v.length >= 3 || "El usuario es minimo 3 caracteres",
+      ],
       claveRules: [
-        (v) => !!v || "La clave es requeria",
-        (v) => v.length >= 8 || "La clave debe tener minimo 8 caracteres",
+        (v) => !!v || "E-mail is required",
+        (v) => v.length >= 6 || "La clave debe tener minimo 6 caracteres",
       ],
     };
   },
   methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    },
     validar() {
       var datos = {
+        name: this.nombre,
         email: this.correo,
         password: this.clave,
+        Password_confirmation: this.clave2,
+        //tipo: this.tipo,
       };
-      this.$store.dispatch("login", datos).catch((er) => {
-        this.mensaje = "Correo o contraseña incorrecta";
+      if (this.clave === this.clave2) {
+        axios
+          .post("./registrar", datos)
+          .then((res) => {
+            this.color = "success";
+            this.mensaje = res.data.message;
+            this.snackbar = true;
+            window.location.reload();
+          })
+          .catch((er) => {
+            this.color = "red accent-2";
+            this.mensaje = "El correo ya existe";
+            this.snackbar = true;
+          });
+      } else {
+        this.color = "red accent-2";
+        this.mensaje = "La clave deben ser iguales";
         this.snackbar = true;
-      });
+      }
 
       this.$refs.form.validate();
     },
