@@ -80,14 +80,14 @@ export default {
       tipo: ["Admin", "Usuario"],
       mensaje: "",
       user: {},
-      nombre: "Pedro",
-      correo: "algo@algo.com",
+      nombre: "",
+      correo: "",
       mostrarPass: false,
-      clave: "12345678",
-      clave2: "12345678",
+      clave: "",
+      clave2: "",
       correoRules: [
-        (v) => !!v || "Usuario es requerido",
-        (v) => v.length >= 5 || "El usuario es minimo 5 caracteres",
+        (v) => !!v || "El correo es requerido",
+        (v) => v.length >= 7 || "El correo es minimo 7 caracteres",
         (v) => {
           const pattern =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -99,8 +99,8 @@ export default {
         (v) => v.length >= 3 || "El usuario es minimo 3 caracteres",
       ],
       claveRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => v.length >= 6 || "La clave debe tener minimo 6 caracteres",
+        (v) => !!v || "La clave es requerida",
+        (v) => v.length >= 8 || "La clave debe tener minimo 8 caracteres",
       ],
     };
   },
@@ -120,7 +120,11 @@ export default {
             this.color = "success";
             this.mensaje = res.data.message;
             this.snackbar = true;
-            window.location.reload();
+            this.nombre = "";
+            this.correo = "";
+            this.clave = "";
+            this.clave2 = "";
+            //window.location.reload();
           })
           .catch((er) => {
             this.color = "red accent-2";

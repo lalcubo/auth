@@ -5528,15 +5528,15 @@ __webpack_require__.r(__webpack_exports__);
       tipo: ["Admin", "Usuario"],
       mensaje: "",
       user: {},
-      nombre: "Pedro",
-      correo: "algo@algo.com",
+      nombre: "",
+      correo: "",
       mostrarPass: false,
-      clave: "12345678",
-      clave2: "12345678",
+      clave: "",
+      clave2: "",
       correoRules: [function (v) {
-        return !!v || "Usuario es requerido";
+        return !!v || "El correo es requerido";
       }, function (v) {
-        return v.length >= 5 || "El usuario es minimo 5 caracteres";
+        return v.length >= 7 || "El correo es minimo 7 caracteres";
       }, function (v) {
         var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return pattern.test(v) || "correo no valido";
@@ -5547,9 +5547,9 @@ __webpack_require__.r(__webpack_exports__);
         return v.length >= 3 || "El usuario es minimo 3 caracteres";
       }],
       claveRules: [function (v) {
-        return !!v || "E-mail is required";
+        return !!v || "La clave es requerida";
       }, function (v) {
-        return v.length >= 6 || "La clave debe tener minimo 6 caracteres";
+        return v.length >= 8 || "La clave debe tener minimo 8 caracteres";
       }]
     };
   },
@@ -5570,7 +5570,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.color = "success";
           _this.mensaje = res.data.message;
           _this.snackbar = true;
-          window.location.reload();
+          _this.nombre = "";
+          _this.correo = "";
+          _this.clave = "";
+          _this.clave2 = ""; //window.location.reload();
         })["catch"](function (er) {
           _this.color = "red accent-2";
           _this.mensaje = "El correo ya existe";
