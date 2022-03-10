@@ -41,6 +41,9 @@
         <div align="center">
           <router-link to="/registrar">Crear Cuenta</router-link>
         </div>
+        <div align="center">
+          <router-link to="/users">listar</router-link>
+        </div>
       </v-card>
     </v-row>
     <v-snackbar
@@ -63,9 +66,9 @@ export default {
       snackbar: false,
       mensaje: "",
       user: {},
-      correo: "kenny@gmail.com",
+      correo: "admin@admin.com",
       mostrarPass: false,
-      clave: "password",
+      clave: "admin123",
       correoRules: [
         (v) => !!v || "Correo es requerido",
         (v) => v.length >= 5 || "El usuario es minimo 5 caracteres",

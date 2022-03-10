@@ -118,7 +118,7 @@ export default {
           .post("./registrar", datos)
           .then((res) => {
             this.color = "success";
-            this.mensaje = res.data.message;
+            this.mensaje = res.data.mensaje;
             this.snackbar = true;
             this.nombre = "";
             this.correo = "";

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/registrar', 'App\Http\Controllers\Auth\RegisterController@register');
+//para admin de usuarios
+Route::get('/users', 'App\Http\Controllers\Admin\UserController@index');
+Route::get('/users/{user}/edit', 'App\Http\Controllers\Admin\UserController@edit');
+Route::put('/users/{user}', 'App\Http\Controllers\Admin\UserController@update');
+Route::delete('/users/{user}', 'App\Http\Controllers\Admin\UserController@destroy');
+
+//Route::resource('users', UserController::class);
 
 
 Route::get('{any}', function () {

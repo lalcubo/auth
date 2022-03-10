@@ -21,7 +21,10 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title
+                >{{ item.title }}
+                <router-link to="/users">listar</router-link>
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -63,6 +66,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
+      this.$router.push({ name: "principal" });
     },
     iniciar() {
       this.$router.push("principal");
