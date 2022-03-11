@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-card class="elevation-12">
+      <v-card class="elevation-12" v-if="$store.state.auth">
         <v-toolbar color="primary" dark flat>
           <v-toolbar-title>Registrar Usuario</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -48,7 +48,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            v-if="!$store.state.auth"
+            v-if="$store.state.auth"
             :disabled="!valido"
             color="primary"
             class="mr-4"

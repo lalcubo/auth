@@ -38,12 +38,6 @@
             Inicar
           </v-btn>
         </v-card-actions>
-        <div align="center">
-          <router-link to="/registrar">Crear Cuenta</router-link>
-        </div>
-        <div align="center">
-          <router-link to="/users">listar</router-link>
-        </div>
       </v-card>
     </v-row>
     <v-snackbar

@@ -21,9 +21,10 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title
-                >{{ item.title }}
-                <router-link to="/users">listar</router-link>
+              <v-list-item-title>
+                <router-link :to="{ name: item.url }">{{
+                  item.title
+                }}</router-link>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -58,8 +59,8 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: "Home", icon: "mdi-view-dashboard" },
-        { title: "About", icon: "mdi-forum" },
+        { title: "usuarios", icon: "mdi-view-dashboard", url: "users" },
+        { title: "About", icon: "mdi-forum", url: "#" },
       ],
     };
   },

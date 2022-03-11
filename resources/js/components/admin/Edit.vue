@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-    <v-btn outlined color="indigo" @click="asignar()">Asignar</v-btn>
-    <v-card class="elevation-12" v-if="this.datos">
+  <v-container v-if="datos.user.name">
+    <v-btn outlined color="indigo" @click="asignar()">Aceptar</v-btn>
+    <v-card class="elevation-12">
       <v-toolbar color="primary" dark flat>
         <v-toolbar-title>Asignar roles</v-toolbar-title>
         <v-spacer></v-spacer>

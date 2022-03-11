@@ -1,9 +1,9 @@
 <template>
-  <v-cointainer class="fill-height" fluid>
+  <v-cointainer class="fill-height" fluid v-if="$store.state.auth">
     <v-row align="center" justify="center">
       <v-card class="mt-12 mx-auto">
         <div class="text-right">
-          <v-btn outlined color="indigo" @click="onButtonClick()">
+          <v-btn outlined color="indigo" @click="registrar()">
             <v-icon dense>mdi-plus</v-icon>
             Registrar
           </v-btn>
@@ -46,6 +46,21 @@
           {{ this.mensaje }}
         </v-snackbar>
       </v-card>
+      <v-dialog v-model="dialog" persistent max-width="290">
+        <v-card>
+          <v-card-title class="text-h5"> Eliminar usuario </v-card-title>
+          <v-card-text>Desea eliminar el usuario con sus roles</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="eliminarusuario()">
+              Si
+            </v-btn>
+            <v-btn color="green darken-1" text @click="dialog = false">
+              No
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
   </v-cointainer>
 </template>
@@ -54,6 +69,8 @@ export default {
   data: () => ({
     snackbar: false,
     mensaje: "",
+    id: "",
+    dialog: false,
     datos: [],
     headers: [
       {
@@ -100,12 +117,17 @@ export default {
       this.$router.push({ name: "usersedit", params: { id: id } });
     },
     eliminar(id) {
+      this.id = id;
+      this.dialog = true;
+    },
+    eliminarusuario() {
       axios
-        .delete(`./users/${id}`)
+        .delete(`./users/${this.id}`)
         .then((res) => {
           this.color = "success";
           this.mensaje = res.data.mensaje;
           this.snackbar = true;
+          this.dialog = false;
           this.cargar();
         })
         .catch((er) => {
@@ -113,6 +135,9 @@ export default {
           this.mensaje = er;
           this.snackbar = true;
         });
+    },
+    registrar() {
+      this.$router.push({ name: "registrar" });
     },
     cargar() {
       axios
