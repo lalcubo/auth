@@ -1,5 +1,5 @@
 <template>
-  <v-cointainer class="fill-height" fluid v-if="$store.state.auth">
+  <v-container class="fill-height" fluid v-if="$store.state.auth">
     <v-row align="center" justify="center">
       <v-card class="mt-12 mx-auto">
         <div class="text-right">
@@ -62,7 +62,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-  </v-cointainer>
+  </v-container>
 </template>
 <script>
 export default {
