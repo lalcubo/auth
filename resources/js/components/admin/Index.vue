@@ -66,10 +66,12 @@
 </template>
 <script>
 export default {
+  name: "userIndex",
   data: () => ({
     snackbar: false,
     mensaje: "",
     id: "",
+    color: "",
     dialog: false,
     datos: [],
     headers: [

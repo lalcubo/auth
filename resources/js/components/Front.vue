@@ -55,6 +55,7 @@
 </template>
 <script>
 export default {
+  name: "front",
   data() {
     return {
       drawer: false,

@@ -54,6 +54,7 @@
 </template>
 <script>
 export default {
+  name: "principal",
   data() {
     return {
       valido: false,

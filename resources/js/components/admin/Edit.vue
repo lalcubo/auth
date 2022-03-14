@@ -74,11 +74,13 @@
 </template>
 <script>
 export default {
+  name: "editUser",
   props: ["id"],
   data() {
     return {
       datos: "",
       snackbar: false,
+      color: "",
       roles: [],
       mensaje: "",
       nuevosroles: [],

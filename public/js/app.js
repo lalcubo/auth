@@ -5329,6 +5329,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "front",
   data: function data() {
     return {
       drawer: false,
@@ -5424,6 +5425,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "principal",
   data: function data() {
     return {
       valido: false,
@@ -5555,6 +5557,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "registrar",
   data: function data() {
     return {
       valido: false,
@@ -5564,6 +5567,7 @@ __webpack_require__.r(__webpack_exports__);
       user: {},
       nombre: "",
       correo: "",
+      color: "",
       mostrarPass: false,
       clave: "",
       clave2: "",
@@ -5712,11 +5716,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "editUser",
   props: ["id"],
   data: function data() {
     return {
       datos: "",
       snackbar: false,
+      color: "",
       roles: [],
       mensaje: "",
       nuevosroles: []
@@ -5853,11 +5859,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "userIndex",
   data: function data() {
     return {
       snackbar: false,
       mensaje: "",
       id: "",
+      color: "",
       dialog: false,
       datos: [],
       headers: [{
@@ -32713,7 +32721,7 @@ var render = function () {
                               staticClass: "mr-4",
                               attrs: {
                                 disabled: !_vm.valido,
-                                color: "primary",
+                                color: _vm.primary,
                               },
                               on: { click: _vm.validar },
                             },
