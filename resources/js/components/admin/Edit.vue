@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="datos.user.name">
+  <v-container v-if="datos">
     <v-btn outlined color="indigo" @click="asignar()">Aceptar</v-btn>
     <v-card class="elevation-12">
       <v-toolbar color="primary" dark flat>

@@ -50,7 +50,7 @@
           <v-btn
             v-if="$store.state.auth"
             :disabled="!valido"
-            :color="primary"
+            color="primary"
             class="mr-4"
             @click="validar"
           >
