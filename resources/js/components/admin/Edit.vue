@@ -74,7 +74,7 @@
 </template>
 <script>
 export default {
-  name: "editUser",
+  name: "edituser",
   props: ["id"],
   data() {
     return {

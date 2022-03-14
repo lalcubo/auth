@@ -66,7 +66,7 @@
 </template>
 <script>
 export default {
-  name: "userIndex",
+  name: "userindex",
   data: () => ({
     snackbar: false,
     mensaje: "",

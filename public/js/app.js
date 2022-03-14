@@ -5716,7 +5716,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "editUser",
+  name: "edituser",
   props: ["id"],
   data: function data() {
     return {
@@ -5859,7 +5859,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "userIndex",
+  name: "userindex",
   data: function data() {
     return {
       snackbar: false,
