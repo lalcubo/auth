@@ -8,7 +8,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>John Leider</v-list-item-title>
+            <v-list-item-title>Kenny contreras</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
