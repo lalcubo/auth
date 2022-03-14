@@ -55,7 +55,7 @@
             <v-btn color="green darken-1" text @click="eliminarusuario()">
               Si
             </v-btn>
-            <v-btn color="green darken-1" text @click="dialog = false">
+            <v-btn color="green darken-2" text @click="dialog = false">
               No
             </v-btn>
           </v-card-actions>
