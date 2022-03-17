@@ -4,6 +4,9 @@ import principal from './components/Principal';
 import registrar from './components/Registrar';
 import users from './components/admin/Index';
 import usersedit from './components/admin/Edit';
+import roles from './components/admin/Role';
+import rolesregist from './components/admin/RegistrarRol';
+import rolesedit from './components/admin/EditRol';
 
 Vue.use(Router);
 
@@ -27,6 +30,22 @@ const routes = [
         name: 'usersedit',
         path: '/users/:id',
         component: usersedit,
+        props: true
+    },
+    {
+        name: 'roles',
+        path: '/roles',
+        component: roles
+    },
+    {
+        name: 'rolesregist',
+        path: '/rolesregist',
+        component: rolesregist
+    },
+    {
+        name: 'rolesedit',
+        path: '/roles/:id',
+        component: rolesedit,
         props: true
     },
 ]

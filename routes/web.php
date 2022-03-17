@@ -19,8 +19,14 @@ Route::post('/registrar', 'App\Http\Controllers\Auth\RegisterController@register
 //para admin de usuarios
 Route::get('/users', 'App\Http\Controllers\Admin\UserController@index')->middleware('can:admin.user.index');
 Route::get('/users/{user}/edit', 'App\Http\Controllers\Admin\UserController@edit')->middleware('can:admin.user.edit');
-Route::put('/users/{user}', 'App\Http\Controllers\Admin\UserController@update')->middleware('can:admin.user.edit');;
-Route::delete('/users/{user}', 'App\Http\Controllers\Admin\UserController@destroy')->middleware('can:admin.user.destroy');;
+Route::put('/users/{user}', 'App\Http\Controllers\Admin\UserController@update')->middleware('can:admin.user.edit');
+Route::delete('/users/{user}', 'App\Http\Controllers\Admin\UserController@destroy')->middleware('can:admin.user.destroy');
+
+Route::get('/roles', 'App\Http\Controllers\Admin\RoleController@index')->middleware('can:admin.role.index');
+Route::post('/rolesregist', 'App\Http\Controllers\Admin\RoleController@store')->middleware('can:admin.role.create');
+Route::delete('/roles/{role}', 'App\Http\Controllers\Admin\RoleController@destroy')->middleware('can:admin.role.destroy');
+Route::get('/roles/{role}/edit', 'App\Http\Controllers\Admin\RoleController@edit')->middleware('can:admin.role.edit');
+Route::put('/roles/{role}', 'App\Http\Controllers\Admin\RoleController@update')->middleware('can:admin.role.edit');
 
 //Route::resource('users', UserController::class);
 

@@ -60,7 +60,8 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: "usuarios", icon: "mdi-view-dashboard", url: "users" },
+        { title: "usuarios", icon: "mdi-account-group", url: "users" },
+        { title: "Roles", icon: "mdi-account-details", url: "roles" },
         { title: "About", icon: "mdi-forum", url: "#" },
       ],
     };
