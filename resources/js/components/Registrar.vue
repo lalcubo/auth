@@ -41,8 +41,6 @@
               required
               @click:append="mostrarPass = !mostrarPass"
             ></v-text-field>
-
-            <v-select :items="tipo" label="Standard" dense> </v-select>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -78,7 +76,6 @@ export default {
     return {
       valido: false,
       snackbar: false,
-      tipo: ["Admin", "Usuario"],
       mensaje: "",
       user: {},
       nombre: "",
@@ -129,8 +126,10 @@ export default {
             //window.location.reload();
           })
           .catch((er) => {
+            if (er.toString().includes("422"))
+              this.mensaje = "El correo ya existe";
+            else this.mensaje = "No tienes permisos";
             this.color = "red accent-2";
-            this.mensaje = "El correo ya existe";
             this.snackbar = true;
           });
       } else {

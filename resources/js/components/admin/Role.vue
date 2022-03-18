@@ -3,7 +3,7 @@
     <v-row align="center" justify="center">
       <v-card class="mt-12 mx-auto">
         <div class="text-right">
-          <v-btn outlined color="indigo" @click="registrar()">
+          <v-btn v-if="create" outlined color="indigo" @click="registrar()">
             <v-icon dense>mdi-plus</v-icon>
             Registrar Roles
           </v-btn>
@@ -23,7 +23,11 @@
                 <v-btn v-if="row.item.editar" icon @click="editar(row.item.id)">
                   <v-icon>mdi-lead-pencil</v-icon>
                 </v-btn>
-                <v-btn v-if="row.item.eliminar" icon @click="eliminar(row.item.id)">
+                <v-btn
+                  v-if="row.item.eliminar"
+                  icon
+                  @click="eliminar(row.item.id)"
+                >
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </td>
@@ -41,7 +45,7 @@
           {{ this.mensaje }}
         </v-snackbar>
       </v-card>
-       <v-dialog v-model="dialog" persistent max-width="290">
+      <v-dialog v-model="dialog" persistent max-width="290">
         <v-card>
           <v-card-title class="text-h5"> Eliminar Rol </v-card-title>
           <v-card-text>Esta seguro de eliminar el rol</v-card-text>
@@ -55,7 +59,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog> 
+      </v-dialog>
     </v-row>
   </v-container>
 </template>
@@ -69,6 +73,7 @@ export default {
     dialog: false,
     color: "",
     datos: [],
+    create: false,
     headers: [
       {
         text: "ID",
@@ -84,7 +89,7 @@ export default {
     axios
       .get("./roles")
       .then((res) => {
-        //this.datos = res.data.roles;    
+        //this.datos = res.data.roles;
         this.datos = res.data.roles.map((rol) => {
           const edit = res.data.permisosuser.find(
             (el) => el.name === "admin.role.edit"
@@ -92,12 +97,16 @@ export default {
           const eliminar = res.data.permisosuser.find(
             (el) => el.name === "admin.role.destroy"
           );
-        return {
+          const crear = res.data.permisosuser.find(
+            (el) => el.name === "admin.role.create"
+          );
+          if (crear) this.create = true;
+          return {
             id: rol.id,
             name: rol.name,
             editar: edit ? true : false,
             eliminar: eliminar ? true : false,
-          };    
+          };
         });
       })
       .catch((er) => {
@@ -106,8 +115,8 @@ export default {
         this.snackbar = true;
       });
   },
- methods: {
-     editar(id) {
+  methods: {
+    editar(id) {
       this.$router.push({ name: "rolesedit", params: { id: id } });
     },
     eliminar(id) {
@@ -116,7 +125,7 @@ export default {
     },
     eliminarRol() {
       axios
-       .delete(`./roles/${this.id}`)
+        .delete(`./roles/${this.id}`)
         .then((res) => {
           this.color = "success";
           this.mensaje = res.data.mensaje;
@@ -135,29 +144,29 @@ export default {
     },
     cargar() {
       axios
-      .get("./roles")
-      .then((res) => {
-        //this.datos = res.data.roles;    
-        this.datos = res.data.roles.map((rol) => {
-          const edit = res.data.permisosuser.find(
-            (el) => el.name === "admin.role.edit"
-          );
-          const eliminar = res.data.permisosuser.find(
-            (el) => el.name === "admin.role.destroy"
-          );
-        return {
-            id: rol.id,
-            name: rol.name,
-            editar: edit ? true : false,
-            eliminar: eliminar ? true : false,
-          };    
+        .get("./roles")
+        .then((res) => {
+          //this.datos = res.data.roles;
+          this.datos = res.data.roles.map((rol) => {
+            const edit = res.data.permisosuser.find(
+              (el) => el.name === "admin.role.edit"
+            );
+            const eliminar = res.data.permisosuser.find(
+              (el) => el.name === "admin.role.destroy"
+            );
+            return {
+              id: rol.id,
+              name: rol.name,
+              editar: edit ? true : false,
+              eliminar: eliminar ? true : false,
+            };
+          });
+        })
+        .catch((er) => {
+          this.color = "red accent-2";
+          this.mensaje = er;
+          this.snackbar = true;
         });
-      })
-      .catch((er) => {
-        this.color = "red accent-2";
-        this.mensaje = er;
-        this.snackbar = true;
-      });
     },
   },
 };

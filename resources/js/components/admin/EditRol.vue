@@ -11,11 +11,12 @@
           >Nombre del Rol
           <span class="d-flex flex-row mb-6"
             ><b>{{ datos.rol.name }}</b></span
-          ></label   >
+          ></label
+        >
         <v-spacer></v-spacer>
-      
+
         <v-spacer></v-spacer>
-        <v-simple-table dense>
+        <v-simple-table fixed-header height="200px" dense>
           <template v-slot:default>
             <thead>
               <tr>
@@ -61,7 +62,7 @@
       rounded="pill"
       right
     >
-    {{ this.mensaje }}
+      {{ this.mensaje }}
     </v-snackbar>
   </v-container>
 </template>
@@ -79,12 +80,14 @@ export default {
       nuevospermisos: [],
     };
   },
-   mounted() {
+  mounted() {
     axios
-    .get(`./roles/${this.id}/edit`)
-      .then((res) => {        
+      .get(`./roles/${this.id}/edit`)
+      .then((res) => {
         this.permisos = res.data.permisos.map((per) => {
-          const nuevoper = res.data.permisosRol.find((el) => el.name === per.name);
+          const nuevoper = res.data.permisosRol.find(
+            (el) => el.name === per.name
+          );
           if (nuevoper) this.nuevospermisos.push(per.name);
           return {
             id: per.id,

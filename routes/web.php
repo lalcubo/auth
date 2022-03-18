@@ -15,8 +15,9 @@ use App\Http\Controllers\Admin\UserController;
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
-Route::post('/registrar', 'App\Http\Controllers\Auth\RegisterController@register');
+Route::post('/registrar', 'App\Http\Controllers\Auth\RegisterController@register')->middleware('can:admin.user.create');;
 //para admin de usuarios
+Route::get('/getroles', 'App\Http\Controllers\Admin\UserController@getRoles');
 Route::get('/users', 'App\Http\Controllers\Admin\UserController@index')->middleware('can:admin.user.index');
 Route::get('/users/{user}/edit', 'App\Http\Controllers\Admin\UserController@edit')->middleware('can:admin.user.edit');
 Route::put('/users/{user}', 'App\Http\Controllers\Admin\UserController@update')->middleware('can:admin.user.edit');

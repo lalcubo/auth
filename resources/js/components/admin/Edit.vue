@@ -22,7 +22,7 @@
         >
 
         <v-spacer></v-spacer>
-        <v-simple-table dense>
+        <v-simple-table fixed-header height="200px" dense>
           <template v-slot:default>
             <thead>
               <tr>

@@ -12,19 +12,6 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-
-     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:50'],
-        ]);
-    }
 
     public function index()
     {
@@ -60,7 +47,7 @@ class RoleController extends Controller
         //        
         $roles = Role::create($request->post());
         return response()->json([
-            'roles'=>$roles,
+            'roles' => $roles,
         ]);
     }
 
@@ -82,14 +69,14 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
-    {        
+    {
         $permisos = Permission::all();
         $permisosrol = $role->permissions;
 
         return response()->json([
             'rol' => $role,
             'permisosRol' => $permisosrol,
-            'permisos' => $permisos    
+            'permisos' => $permisos
         ], 200);
     }
 
@@ -116,10 +103,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $rol)
+    public function destroy(Role $role)
     {
-        $rol->delete();
+        $role->delete();
         return response()->json([
             'mensaje' => 'Se borro el Rol',
-        ], 200);    }
+        ], 200);
+    }
 }

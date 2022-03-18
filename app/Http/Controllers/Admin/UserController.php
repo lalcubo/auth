@@ -116,4 +116,14 @@ class UserController extends Controller
             'mensaje' => 'Se borro el usuario',
         ], 200);
     }
+
+
+    protected function getRoles()
+    {
+        $user = User::find(auth()->id());
+        $permisosuser = $user->getPermissionsViaRoles();
+        return response()->json([
+            'permisosuser' => $permisosuser
+        ], 200);
+    }
 }

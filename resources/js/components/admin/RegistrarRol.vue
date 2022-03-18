@@ -12,7 +12,7 @@
               v-model="nombre"
               label="Nombre"
               required
-            ></v-text-field>           
+            ></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -59,18 +59,19 @@ export default {
         name: this.nombre,
       };
       axios
-          .post("./rolesregist", datos)
-          .then((res) => {
-            this.color = "success";
-            this.mensaje = "El rol fue registrado";
-            this.snackbar = true;
-            this.nombre = "";
-          })
-          .catch((er) => {
-            this.color = "red accent-2";
-            this.mensaje = "El rol ya existe";
-            this.snackbar = true;
-          });
+        .post("./rolesregist", datos)
+        .then((res) => {
+          this.color = "success";
+          this.mensaje = "El rol fue registrado";
+          this.snackbar = true;
+          this.nombre = "";
+        })
+        .catch((er) => {
+          if (er.toString().includes("500")) this.mensaje = "El rol ya existe ";
+          else this.mensaje = "No tienes permisos";
+          this.color = "red accent-2";
+          this.snackbar = true;
+        });
     },
   },
 };

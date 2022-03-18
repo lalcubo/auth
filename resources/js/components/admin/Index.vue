@@ -3,7 +3,7 @@
     <v-row align="center" justify="center">
       <v-card class="mt-12 mx-auto">
         <div class="text-right">
-          <v-btn outlined color="indigo" @click="registrar()">
+          <v-btn v-if="create" outlined color="indigo" @click="registrar()">
             <v-icon dense>mdi-plus</v-icon>
             Registrar
           </v-btn>
@@ -74,6 +74,7 @@ export default {
     color: "",
     dialog: false,
     datos: [],
+    create: false,
     headers: [
       {
         text: "ID",
@@ -98,6 +99,10 @@ export default {
           const eliminar = res.data.permisosuser.find(
             (el) => el.name === "admin.user.destroy"
           );
+          const crear = res.data.permisosuser.find(
+            (el) => el.name === "admin.user.create"
+          );
+          if (crear) this.create = true;
           return {
             id: usu.id,
             name: usu.name,
